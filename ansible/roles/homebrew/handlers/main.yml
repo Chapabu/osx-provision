@@ -1,0 +1,4 @@
+---
+# Handlers for Homebrew
+- name: Source .profile
+  shell: source $HOME/.profile
