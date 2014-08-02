@@ -1,5 +1,13 @@
 - hosts: localhost
   connection: local
+  vars_files:
+    - "vars/local_vars.yml"
 
   roles:
     - homebrew
+
+  pre_tasks:
+
+    - name: Ensure there is a .profile file.
+      stat: path=/Users/{{ user_dir }}/.profile
+      register: profile
