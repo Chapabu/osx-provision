@@ -1,0 +1,9 @@
+# Set up Homebrew (http://brew.sh/)
+
+  - name: Check if Homebrew is already installed
+    shell: ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+    args:
+       creates: /usr/local/bin/brew
+
+  - name: Ensure /usr/local/bin is in PATH
+    lineinfile: dest=~/.profile line="export PATH=/usr/local/bin:$PATH"
