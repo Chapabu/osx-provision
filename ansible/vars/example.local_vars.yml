@@ -1,0 +1,17 @@
+---
+# Homebrew variables
+homebrew_packages:
+  - wget
+  - unrar
+
+# Node variables
+node_packages:
+  - grunt-cli
+  - bower
+install_yeoman: yes
+yeoman_generators:
+  - webapp
+  - bootstrap
+  - backbone
+  - marionette
+  - ember
