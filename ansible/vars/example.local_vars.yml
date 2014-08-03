@@ -8,7 +8,6 @@ homebrew_packages:
 node_packages:
   - grunt-cli
   - bower
-install_yeoman: yes
 yeoman_generators:
   - webapp
   - bootstrap
