@@ -7,3 +7,5 @@
 
   - name: Ensure /usr/local/bin is in PATH
     lineinfile: dest=~/.profile line="export PATH=/usr/local/bin:$PATH"
+    notify:
+      - Source .profile
