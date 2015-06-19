@@ -4,3 +4,42 @@
     homebrew:
       name: mysql
       state: present
+    tags:
+      - mysql
+
+  - name: Get Homebrew prefix
+    shell: echo $(brew --prefix)
+    register: brew_prefix
+    when: brew_prefix is not defined
+    tags:
+      - mysql
+
+  - name: Get MySQL Homebrew prefix
+    shell: echo $(brew --prefix mysql)
+    register: mysql_brew_prefix
+    tags:
+      - mysql
+
+  - name: Copy MySQL configuration
+    shell: "cp {{ mysql_brew_prefix.stdout }}/support-files/my-default.cnf {{ brew_prefix.stdout }}/etc/my.cnf"
+    args:
+      creates: "{{ brew_prefix.stdout }}/etc/my.cnf"
+    tags:
+      - mysql
+
+  - name: Set max_allowed_packet
+    lineinfile:
+      dest: "{{ brew_prefix.stdout }}/etc/my.cnf"
+      line: "max_allowed_packet = 1073741824"
+      state: present
+    tags:
+      - mysql
+
+  - name: Set innodb_file_per_table
+    lineinfile:
+      dest: "{{ brew_prefix.stdout }}/etc/my.cnf"
+      line: "innodb_file_per_table = 1"
+      regexp: '^#\s?innodb_buffer_pool_size 1$'
+      state: present
+    tags:
+      - mysql

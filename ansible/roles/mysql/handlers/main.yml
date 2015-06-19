@@ -1,0 +1,6 @@
+---
+  - name: Start MySQL
+    command: brew services start mysql
+
+  - name: Restart MySQL
+    command: brew services restart mysql

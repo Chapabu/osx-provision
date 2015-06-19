@@ -5,12 +5,10 @@
 
   roles:
     - homebrew
+    - mysql
 
-  pre_tasks:
-
-    - name: Ensure there is a .profile file.
-      stat: path=/Users/{{ user_dir }}/.profile
-      register: profile
-
-    - name: Update Homebrew
-      homebrew: update_homebrew=yes
+  tasks:
+    - name: Get Brew prefix
+      shell: echo $(brew --prefix)
+      register: brew_prefix
+      when: brew_prefix is not defined

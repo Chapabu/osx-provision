@@ -1,15 +1,18 @@
 # Set up Homebrew (http://brew.sh/)
   - name: Install Homebrew
-    shell: ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+    shell: ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     register: homebrew_result
     failed_when: "homebrew_result.rc != 0 and 'Homebrew is already installed' not in homebrew_result.stderr"
 
+  - name: Tap homebrew/cask
+    homebrew_tap:
+      tap: caskroom/cask
+
   - name: Install Homebrew Cask
     homebrew: 
-      name: caskroom/cask/brew-cask
-      state: present
+      name: brew-cask
+      state: latest
 
   - name: Tap brew/services
-    command: brew tap homebrew/services
-    register: brew_service_tap
-    failed_when: "brew_service_tap.rc != 0 and 'Already tapped' not in brew_service_tap.stderr" 
+    homebrew_tap:
+      tap: homebrew/services
