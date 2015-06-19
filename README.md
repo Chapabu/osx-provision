@@ -11,7 +11,7 @@ Ensures that Homebrew is installed.
 ### NPM (todo)
 
 Installs NPM and any Node.js packages required
-
+.
 ### Nginx (todo)
 
 Installs and configures Nginx

@@ -1,0 +1,6 @@
+---
+
+  - name: Install MySQL
+    homebrew:
+      name: mysql
+      state: present
