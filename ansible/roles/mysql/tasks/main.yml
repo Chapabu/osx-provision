@@ -24,6 +24,8 @@
     shell: "cp {{ mysql_brew_prefix.stdout }}/support-files/my-default.cnf {{ brew_prefix.stdout }}/etc/my.cnf"
     args:
       creates: "{{ brew_prefix.stdout }}/etc/my.cnf"
+    notify:
+      - Restart MySQL
     tags:
       - mysql
 
@@ -32,6 +34,8 @@
       dest: "{{ brew_prefix.stdout }}/etc/my.cnf"
       line: "max_allowed_packet = 1073741824"
       state: present
+    notify:
+      - Restart MySQL
     tags:
       - mysql
 
@@ -39,7 +43,20 @@
     lineinfile:
       dest: "{{ brew_prefix.stdout }}/etc/my.cnf"
       line: "innodb_file_per_table = 1"
-      regexp: '^#\s?innodb_buffer_pool_size 1$'
       state: present
+    notify:
+      - Restart MySQL
+    tags:
+      - mysql
+
+  - name: Set innodb_buffer_pool_size
+    lineinfile:
+      dest: "{{ brew_prefix.stdout }}/etc/my.cnf"
+      line: "innodb_buffer_pool_size = 128M"
+      regexp: '#\sinnodb_buffer_pool_size.*$'
+      backrefs: yes
+      state: present
+    notify:
+      - Restart MySQL
     tags:
       - mysql

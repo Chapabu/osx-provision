@@ -2,6 +2,15 @@
 
 Shell scripts and Ansible playbooks for provisioning an OSX machine for PHP development.
 
+## Requirements
+
+* Ansible 1.7+
+
+## Usage
+
+``` bash
+ansible-playbook -i hosts -l localhost
+```
 ## Roles
 
 ### Homebrew
