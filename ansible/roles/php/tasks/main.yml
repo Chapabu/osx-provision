@@ -7,7 +7,7 @@
     notify:
       - Start PHP
     tags:
-      - php      
+      - php
 
   - name: Install PHP modules
     homebrew:
@@ -15,9 +15,9 @@
       state: latest
     with_items: "{{ php_modules }}"
     notify:
-      - Restart PHP  
+      - Restart PHP
     tags:
-      - php      
+      - php
 
   - name: Ensure log directory exists and is writable
     file:
@@ -34,6 +34,6 @@
       src: php.ini.j2
       dest: "/usr/local/etc/php/{{ php_version }}/php.ini"
     notify:
-    - Restart PHP 
+    - Restart PHP
     tags:
       - php
