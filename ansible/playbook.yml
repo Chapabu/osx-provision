@@ -4,11 +4,6 @@
     - "vars/local_vars.yml"
 
   roles:
-    - homebrew
+    - { role: homebrew, tags: ["php", "mysql"]}
     - mysql
-
-  tasks:
-    - name: Get Brew prefix
-      shell: echo $(brew --prefix)
-      register: brew_prefix
-      when: brew_prefix is not defined
+    - php

@@ -1,0 +1,33 @@
+---
+
+  - name: Install PHP
+    homebrew:
+      name: "php{{ php_brew_version }}"
+      state: latest
+    tags:
+      - php      
+
+  - name: Install PHP modules
+    homebrew:
+      name: "php{{php_brew_version}}-{{ item }}"
+      state: latest
+    with_items: "{{ php_modules }}"    
+    tags:
+      - php      
+
+  - name: Ensure log directory exists and is writable
+    file:
+      path: "{{ php_error_log_path }}"
+      state: directory
+      group: "staff"
+      mode: 0664
+    sudo: yes
+    tags:
+      - php
+
+  - name: Configure PHP
+    template:
+      src: php.ini.j2
+      dest: "/usr/local/etc/php/{{ php_version }}/php.ini"
+    tags:
+      - php

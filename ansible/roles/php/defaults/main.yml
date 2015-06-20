@@ -1,0 +1,24 @@
+# This is the actual version you want (i.e. 5.5, 5.6)
+php_version: 5.6
+php_brew_version: "{{ php_version | replace('.', '')}}"
+
+# These will have the PHP version prepended.
+php_modules:
+  - xdebug
+  - uploadprogress
+  - mcrypt
+  - imagick
+  - memcached
+  - redis
+  - opcache
+
+# PHP.ini settings
+php_date_timezone: "Europe/London"
+php_memory_limit: 512M
+php_post_max_size: 200M
+php_upload_max_filesize: 100M
+php_default_socket_timeout: 600
+php_max_execution_time: 300
+php_max_input_time: 600
+# Ensure there is no trailing slash here.
+php_error_log_path: "/workspace/logs/php"

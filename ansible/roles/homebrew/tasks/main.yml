@@ -16,3 +16,7 @@
   - name: Tap brew/services
     homebrew_tap:
       tap: homebrew/services
+
+  - name: Get Brew prefix
+    shell: echo $(brew --prefix)
+    register: brew_prefix

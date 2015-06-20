@@ -7,18 +7,19 @@
     tags:
       - mysql
 
-  - name: Get Homebrew prefix
-    shell: echo $(brew --prefix)
-    register: brew_prefix
-    when: brew_prefix is not defined
-    tags:
-      - mysql
-
   - name: Get MySQL Homebrew prefix
     shell: echo $(brew --prefix mysql)
     register: mysql_brew_prefix
     tags:
       - mysql
+
+  - name: Debug 1
+    debug:
+      msg: "{{ mysql_brew_prefix }}"
+
+  - name: Debug 2 
+    debug:
+      msg: "{{ brew_prefix }}"
 
   - name: Copy MySQL configuration
     shell: "cp {{ mysql_brew_prefix.stdout }}/support-files/my-default.cnf {{ brew_prefix.stdout }}/etc/my.cnf"
