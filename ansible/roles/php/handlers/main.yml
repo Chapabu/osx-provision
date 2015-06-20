@@ -1,0 +1,6 @@
+---
+  - name: Start PHP
+    command: "brew services start php{{ php_brew_version }}"
+
+  - name: Restart PHP
+    command: "brew services restart php{{ php_brew_version }}"

@@ -4,6 +4,8 @@
     homebrew:
       name: "php{{ php_brew_version }}"
       state: latest
+    notify:
+      - Start PHP
     tags:
       - php      
 
@@ -11,7 +13,9 @@
     homebrew:
       name: "php{{php_brew_version}}-{{ item }}"
       state: latest
-    with_items: "{{ php_modules }}"    
+    with_items: "{{ php_modules }}"
+    notify:
+      - Restart PHP  
     tags:
       - php      
 
@@ -29,5 +33,7 @@
     template:
       src: php.ini.j2
       dest: "/usr/local/etc/php/{{ php_version }}/php.ini"
+    notify:
+    - Restart PHP 
     tags:
       - php
