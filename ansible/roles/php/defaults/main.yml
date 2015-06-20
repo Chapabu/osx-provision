@@ -22,3 +22,7 @@ php_max_execution_time: 300
 php_max_input_time: 600
 # Ensure there is no trailing slash here.
 php_error_log_path: "/workspace/logs/php"
+
+# Opcache settings
+php_opcache_memory_consumption: 128
+php_opcache_error_log_path: "{{ php_error_log_path }}"

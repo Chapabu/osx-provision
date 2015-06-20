@@ -37,3 +37,13 @@
     - Restart PHP
     tags:
       - php
+
+  - name: Configure PHP-Opcache
+    template:
+      src: ext-opcache.ini.j2
+      dest: "/usr/local/etc/php/{{ php_version }}/conf.d/ext-opcache.ini"
+    when: "'opcache' in php_modules"
+    notify:
+      - Restart PHP
+    tags:
+      - php
