@@ -1,6 +1,7 @@
 ---
-  - name: Start apache
-    command: "brew services start httpd"
-
   - name: Restart apache
     command: "brew services restart httpd"
+
+  - name: Start port forwarding
+    command: launchctl load -Fw /Library/LaunchDaemons/co.echo.httpdfwd.plist
+    sudo: yes

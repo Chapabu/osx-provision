@@ -57,7 +57,12 @@
     tags:
       - apache
 
-  - name: Start Apache
-    command: brew services start httpd22
+  - name: Configure firewall port forwarding
+    template:
+        src: co.echo.httpdfwd.plist.j2
+        dest: /Library/LaunchDaemons/co.echo.httpdfwd.plist
+    notify:
+      - Launch port forwarding
+    sudo: yes
     tags:
       - apache
