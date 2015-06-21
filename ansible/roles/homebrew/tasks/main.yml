@@ -8,8 +8,12 @@
     homebrew_tap:
       tap: caskroom/cask
 
+  - name: Tap homebrew/dupes
+    homebrew_tap:
+      tap: homebrew/dupes
+
   - name: Install Homebrew Cask
-    homebrew: 
+    homebrew:
       name: brew-cask
       state: latest
 

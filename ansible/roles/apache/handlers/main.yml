@@ -1,0 +1,6 @@
+---
+  - name: Start apache
+    command: "brew services start httpd"
+
+  - name: Restart apache
+    command: "brew services restart httpd"

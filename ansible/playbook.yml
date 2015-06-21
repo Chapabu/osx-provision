@@ -4,6 +4,7 @@
     - "vars/local_vars.yml"
 
   roles:
-    - { role: homebrew, tags: ["php", "mysql"]}
+    - { role: homebrew, tags: ["php", "mysql", "apache"]}
     - mysql
     - php
+    - apache

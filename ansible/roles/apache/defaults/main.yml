@@ -1,0 +1,10 @@
+fastcgi_port: 9009
+vhost_directory: /usr/local/etc/apache2/2.2/extra
+apache_log_dir: /usr/local/var/log/apache2
+apache_ssl_dir: /usr/local/etc/apache2/ssl
+# We can't have Brewed Apache listen on port 80 without root, so we set up some
+# forwarding rules. These variables determine those port assignments.
+apache_listen_port: 8080
+apache_ssl_listen_port: 8443
+listen_port_redirect_to: 80
+ssl_port_redirect_to: 443
