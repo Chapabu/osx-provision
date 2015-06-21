@@ -15,20 +15,15 @@ ansible-playbook -i hosts -l localhost
 
 ### Homebrew
 
-Ensures that Homebrew is installed.
+* Installs Homebrew
+* Installs Hombrew Cask
+* Taps the Homebrew services manager
 
-### NPM (todo)
+### PHP
 
-Installs NPM and any Node.js packages required
-.
-### Nginx (todo)
-
-Installs and configures Nginx
-
-### PHP (todo)
-
-Installs and configures PHP using Homebrew
-
-### RVM (todo)
-	
-Installs RVM, Bundler, and any defined ruby versions. 
+* Installs PHP
+* Configures PHP
+* Installs useful PHP modules
+* Configures certain PHP modules (OpCache)
+* Installs Composer
+* Installs global composer packages
