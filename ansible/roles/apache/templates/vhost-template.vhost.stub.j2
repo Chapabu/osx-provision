@@ -1,0 +1,8 @@
+# Manual VirtualHost template for HTTPS
+<VirtualHost *:8080>
+  ServerName {{ '{{' }} project_url {{ '}}' }}
+  DocumentRoot {{ '{{' }} project_directory {{ '}}' }}
+
+  CustomLog "{{ apache_log_dir }}/{{ '{{' }} project_url {{ '}}' }}-access_log" combined
+  ErrorLog "{{ apache_log_dir }}/{{ '{{' }} project_url {{ '}}' }}-error_log"
+</VirtualHost>

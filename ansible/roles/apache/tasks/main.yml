@@ -43,6 +43,13 @@
     tags:
       - apache
 
+  - name: Create vhosts directory
+    file:
+      dest: "{{ vhost_directory }}"
+      state: directory
+    tags:
+      - apache
+
   - name: Create Apache logs directory
     file:
       dest: "{{ apache_log_dir }}"
@@ -82,5 +89,19 @@
       creates: "{{ apache_ssl_dir }}/private.key"
     notify:
       - Restart Apache
+    tags:
+      - apache
+
+  - name: Copy vhost stub
+    template:
+      src: vhost-template.vhost.stub.j2
+      dest: "{{ vhost_directory }}/00-vhost-template.vhost.stub"
+    tags:
+      - apache
+
+  - name: Copy SSL vhost stub
+    template:
+      src: ssl-vhost-template.vhost.stub.j2
+      dest: "{{ vhost_directory }}/00-ssl-vhost-template.vhost.stub"
     tags:
       - apache

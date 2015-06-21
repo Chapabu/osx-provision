@@ -1,0 +1,9 @@
+# Manual VirtualHost template for HTTPS
+<VirtualHost *:8443>
+  ServerName {{ '{{' }} project_url {{ '}}' }}
+  DocumentRoot {{ '{{' }} project_directory {{ '}}' }}
+
+  Include "{{ apache_ssl_dir }}/ssl-shared-cert.inc"
+  CustomLog "{{ apache_log_dir }}/{{ '{{' }} project_url {{ '}}' }}-access_log" combined
+  ErrorLog "{{ apache_log_dir }}/{{ '{{' }} project_url {{ '}}' }}-error_log"
+</VirtualHost>
