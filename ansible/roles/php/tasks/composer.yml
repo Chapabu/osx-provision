@@ -26,6 +26,17 @@
       - php
       - composer
 
+  - name: Add Composer binary path to PATH
+    lineinfile:
+      dest: "~/.profile"
+      line: export PATH=~/.composer/vendor/bin:$PATH
+      state: present
+    notify:
+      - Source profile
+    tags:
+      - php
+      - composer
+
   - name: Install global composer dependencies
     command: "composer global require {{ item.name }}:{{ item.version }}"
     args:
