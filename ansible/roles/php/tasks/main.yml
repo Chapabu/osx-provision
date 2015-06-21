@@ -47,3 +47,5 @@
       - Restart PHP
     tags:
       - php
+
+  - include: composer.yml

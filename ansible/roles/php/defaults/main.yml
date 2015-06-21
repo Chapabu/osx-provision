@@ -26,3 +26,12 @@ php_error_log_path: "/workspace/logs/php"
 # Opcache settings
 php_opcache_memory_consumption: 128
 php_opcache_error_log_path: "{{ php_error_log_path }}"
+
+# Composer settings
+composer_path: /usr/local/bin
+composer_home_path: '~/.composer'
+composer_global_packages:
+  - name: drush/drush
+    version: 7.x
+  - name: laravel/installer
+    version: ~1.1

@@ -1,0 +1,36 @@
+---
+  - name: Download Composer
+    shell: curl -sS https://getcomposer.org/installer | php
+    args:
+      creates: "{{ composer_path }}/composer.phar"
+    tags:
+      - php
+      - composer
+
+  - name: Install Composer
+    command: "mv composer.phar {{ composer_path }}/composer.phar"
+    args:
+      creates: "{{ composer_path }}/composer.phar"
+    tags:
+      - php
+      - composer
+
+  # PHPStorm requires the .phar file, so we're just going to Symlink it and
+  # keep both.
+  - name: Symlink composer.phar to composer
+    file:
+      src: "{{ composer_path }}/composer.phar"
+      dest: "{{ composer_path }}/composer"
+      state: link
+    tags:
+      - php
+      - composer
+
+  - name: Install global composer dependencies
+    command: "composer global require {{ item.name }}:{{ item.version }}"
+    args:
+      creates: "{{ composer_home_path }}/vendor/{{ item.name }}"
+    with_items: "{{ composer_global_packages }}"
+    tags:
+      - php
+      - composer
