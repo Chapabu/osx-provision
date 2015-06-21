@@ -39,7 +39,7 @@
       src: httpd22.conf.j2
       dest: /usr/local/etc/apache2/2.2/httpd.conf
     notify:
-      - Restart apache
+      - Restart Apache
     tags:
       - apache
 
@@ -62,7 +62,25 @@
         src: co.echo.httpdfwd.plist.j2
         dest: /Library/LaunchDaemons/co.echo.httpdfwd.plist
     notify:
-      - Launch port forwarding
+      - Start port forwarding
     sudo: yes
+    tags:
+      - apache
+
+  - name: Configure SSL inclusion
+    template:
+      src: ssl-shared-cert.inc.j2
+      dest: "{{ apache_ssl_dir }}/ssl-shared-cert.inc"
+    notify:
+      - Restart Apache
+    tags:
+      - apache
+
+  - name: Generate Self Signed SSL certificate
+    command: 'openssl req -new -nodes -x509 -subj "{{ ssl_subject }}" -days 3650 -keyout {{ apache_ssl_dir }}/private.key -out {{ apache_ssl_dir }}/selfsigned.crt -extensions v3_ca'
+    args:
+      creates: "{{ apache_ssl_dir }}/private.key"
+    notify:
+      - Restart Apache
     tags:
       - apache
