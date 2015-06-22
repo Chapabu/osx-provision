@@ -10,3 +10,9 @@ cask_apps:
   - sublime-text3
   - vagrant
   - virtualbox
+
+cask_fonts:
+  - font-inconsolata-dz
+  - font-inconsolata-dz-for-powerline
+  - font-source-code-pro
+  - font-source-code-pro-for-powerline

@@ -20,3 +20,19 @@
       - "{{ cask_apps }}"
     tags:
       - casks
+
+  - name: Tap caskroom/fonts
+    homebrew_tap:
+      tap: caskroom/fonts
+    tags:
+      - casks
+      - fonts
+
+  - name: Install fonts
+    homebrew_cask:
+      name: "{{ item }}"
+      state: present
+    with_items: "{{ cask_fonts }}"
+    tags:
+      - casks
+      - fonts
