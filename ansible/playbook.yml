@@ -4,9 +4,11 @@
     - "vars/local_vars.yml"
 
   roles:
-    - { role: homebrew, tags: ["php", "mysql", "apache", "casks", "nodejs"]}
+    - { role: homebrew, tags: ["php", "mysql", "apache", "casks", "nodejs", "vim", "zsh"]}
     - mysql
     - php
     - apache
     - casks
     - nodejs
+    - vim
+    - zsh
