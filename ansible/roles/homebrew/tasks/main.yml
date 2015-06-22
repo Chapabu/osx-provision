@@ -3,24 +3,44 @@
     shell: ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     register: homebrew_result
     failed_when: "homebrew_result.rc != 0 and 'Homebrew is already installed' not in homebrew_result.stderr"
+    tags:
+      - homebrew
 
   - name: Tap homebrew/cask
     homebrew_tap:
       tap: caskroom/cask
+    tags:
+      - homebrew
 
   - name: Tap homebrew/dupes
     homebrew_tap:
       tap: homebrew/dupes
+    tags:
+      - homebrew
 
   - name: Install Homebrew Cask
     homebrew:
       name: brew-cask
       state: latest
+    tags:
+      - homebrew
 
   - name: Tap brew/services
     homebrew_tap:
       tap: homebrew/services
+    tags:
+      - homebrew
+
+  - name: Install Homebrew apps
+    homebrew:
+      name: "{{ item }}"
+    with_items:
+      - "{{ homebrew_apps }}"
+    tags:
+      - homebrew
 
   - name: Get Brew prefix
     shell: echo $(brew --prefix)
     register: brew_prefix
+    tags:
+      - homebrew
