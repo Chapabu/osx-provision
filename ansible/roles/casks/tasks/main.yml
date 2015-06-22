@@ -3,14 +3,14 @@
     homebrew_tap:
       tap: caskroom/versions
     tags:
-      - apps
+      - casks
 
   - name: Install Java 6
     homebrew_cask:
       name: java6
     when: "'phpstorm' in {{ cask_apps }} or 'pycharm' in {{ cask_apps }} or 'webstorm' in {{ cask_apps }}"
     tags:
-      - apps
+      - casks
 
   - name: Install apps from cask list
     homebrew_cask:
@@ -19,4 +19,4 @@
     with_items:
       - "{{ cask_apps }}"
     tags:
-      - apps
+      - casks
