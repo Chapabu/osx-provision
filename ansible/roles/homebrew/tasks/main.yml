@@ -1,4 +1,11 @@
 # Set up Homebrew (http://brew.sh/)
+  - name: Install command line tools
+    command: "xcode-select --install"
+    register: command_line_tools_result
+    failed_when: "'command line tools are already installed' not in command_line_tools_result.stderr"
+    tags:
+      - homebrew
+
   - name: Install Homebrew
     shell: ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     register: homebrew_result
