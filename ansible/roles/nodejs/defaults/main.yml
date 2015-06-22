@@ -1,0 +1,13 @@
+global_node_apps:
+  - bower
+  - gulp-cli
+  - grunt-cli
+  - karma-cli
+  - jshint
+  - csslint
+  - yo
+  - generator-angular
+  - generator-hottowel
+  - generator-generator
+  - generator-reveal
+  - generator-node

@@ -1,0 +1,17 @@
+---
+
+  - name: Install NodeJS
+    homebrew:
+      name: nodejs
+      state: latest
+    tags:
+      - nodejs
+
+  - name: Install global node apps
+    npm:
+      name: "{{ item }}"
+      state: latest
+      global: yes
+    with_items: "{{ global_node_apps }}"
+    tags:
+      - nodejs
