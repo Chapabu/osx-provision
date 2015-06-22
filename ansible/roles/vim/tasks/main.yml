@@ -1,0 +1,38 @@
+---
+
+  - name: Install Vim
+    homebrew:
+      name: vim
+      state: latest
+    tags:
+      - vim
+
+  - name: Create .vim/autoload
+    file:
+      dest: ~/.vim/autoload
+      state: directory
+    tags:
+      - vim
+
+  - name: Create .vim/bundle
+    file:
+      dest: ~/.vim/bundle
+      state: directory
+    tags:
+      - vim
+
+  - name: Install Pathogen
+    shell: curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+    args:
+      creates: ~/.vim/autoload/pathogen.vim
+    tags:
+      - vim
+
+  - name: Configure Pathogen
+    lineinfile:
+      dest: ~/.vimrc
+      line: "{{ item }}"
+    with_items:
+      - "execute pathogen#infect()"
+      - "syntax on"
+      - "filetype plugin indent on"

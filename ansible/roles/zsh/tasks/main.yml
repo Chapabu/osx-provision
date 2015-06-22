@@ -1,0 +1,20 @@
+---
+
+  - name: Install Zsh
+    homebrew:
+      name: zsh
+      state: latest
+    tags:
+      - zsh
+
+  - name: Change default shell to Zsh
+    command: "chsh -s {{ zsh_path }}"
+    tags:
+      - zsh
+
+  - name: Install Oh My Zsh
+    git:
+      clone: https://github.com/robbyrussell/oh-my-zsh.git
+      dest: ~/.oh-my-zsh
+    tags:
+      - zsh
