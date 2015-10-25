@@ -23,6 +23,9 @@ php_max_input_time: 600
 # Ensure there is no trailing slash here.
 php_error_log_path: "/workspace/logs/php"
 
+# Apache settings
+apache_config_file: /etc/apache2/httpd.conf
+
 # Opcache settings
 php_opcache_memory_consumption: 128
 php_opcache_error_log_path: "{{ php_error_log_path }}"
@@ -33,5 +36,8 @@ composer_home_path: '~/.composer'
 composer_global_packages:
   - name: drush/drush
     version: 7.x
-  - name: laravel/installer
-    version: ~1.1
+
+# Xdebug settings
+php_xdebug_port: 9000
+php_xdebug_max_nesting_level: 500
+php_xdebug_idekey: PHPSTORM

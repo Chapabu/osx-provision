@@ -6,8 +6,6 @@ global_node_apps:
   - jshint
   - csslint
   - yo
-  - generator-angular
   - generator-hottowel
   - generator-generator
   - generator-reveal
-  - generator-node

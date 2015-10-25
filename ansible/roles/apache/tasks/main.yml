@@ -1,45 +1,11 @@
 ---
 
-  - name: Unload default Apache service
-    command: launchctl unload /System/Library/LaunchDaemons/org.apache.httpd.plist 2>/dev/null
-    sudo: yes
-    tags:
-      - apache
-
-  # There's currently a bug with the Homebrew Ansible module where it won't
-  # install packages with slashes, so we need to tap to the base first.
-  # See: https://github.com/ansible/ansible-modules-extras/issues/252
-  - name: Tap Apache repo
-    homebrew_tap:
-      tap: homebrew/apache
-    tags:
-      - apache
-
-  - name: Install Apache 2.2
-    homebrew:
-      name: httpd22
-      state: latest
-      install_options:
-        - with-brewed-openssl
-        - with-mpm-event
-    tags:
-      - apache
-
-  - name: Install Apache mod_fastcgi
-    homebrew:
-      name: mod_fastcgi
-      state: latest
-      install_options:
-        - with-homebrew-httpd22
-    tags:
-      - apache
-
-  - name: Configure Apache
-    template:
-      src: httpd22.conf.j2
-      dest: /usr/local/etc/apache2/2.2/httpd.conf
-    notify:
-      - Restart Apache
+  - name: Ensure mod_rewrite is loaded
+    lineinfile:
+      dest: "{{ apache_config_file }}"
+      regexp: ".+mod_rewrite.so"
+      line: "LoadModule rewrite_module libexec/apache2/mod_rewrite.so"
+      state: present
     tags:
       - apache
 
@@ -47,6 +13,13 @@
     file:
       dest: "{{ vhost_directory }}"
       state: directory
+    tags:
+      - apache
+
+  - name: Configure vhosts directory
+    lineinfile:
+      dest: "{{ apache_config_file }}"
+      line: "Include {{ vhost_directory }}/*.vhost"
     tags:
       - apache
 
@@ -61,16 +34,6 @@
     file:
       dest: "{{ apache_ssl_dir }}"
       state: directory
-    tags:
-      - apache
-
-  - name: Configure firewall port forwarding
-    template:
-        src: co.echo.httpdfwd.plist.j2
-        dest: /Library/LaunchDaemons/co.echo.httpdfwd.plist
-    notify:
-      - Start port forwarding
-    sudo: yes
     tags:
       - apache
 

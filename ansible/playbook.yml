@@ -1,7 +1,5 @@
 - hosts: localhost
   connection: local
-  vars_files:
-    - "vars/local_vars.yml"
 
   roles:
     - { role: homebrew, tags: ["php", "mysql", "apache", "casks", "nodejs", "vim", "zsh"]}
@@ -10,5 +8,4 @@
     - apache
     - casks
     - nodejs
-    - vim
     - zsh

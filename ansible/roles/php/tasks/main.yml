@@ -4,8 +4,6 @@
     homebrew:
       name: "php{{ php_brew_version }}"
       state: latest
-    notify:
-      - Start PHP
     tags:
       - php
 
@@ -14,8 +12,17 @@
       name: "php{{php_brew_version}}-{{ item }}"
       state: latest
     with_items: "{{ php_modules }}"
+    tags:
+      - php
+
+  - name: Ensure correct PHP version is symlinked in Apache config
+    lineinfile:
+      dest: "{{ apache_config_file }}"
+      line: "LoadModule php5_module    /usr/local/opt/php{{ php_brew_version }}/libexec/apache2/libphp5.so"
+      regexp: "#LoadModule php5_module.+"
+      state: present
     notify:
-      - Restart PHP
+      - Restart Apache
     tags:
       - php
 
@@ -33,8 +40,6 @@
     template:
       src: php.ini.j2
       dest: "/usr/local/etc/php/{{ php_version }}/php.ini"
-    notify:
-    - Restart PHP
     tags:
       - php
 
@@ -43,9 +48,12 @@
       src: ext-opcache.ini.j2
       dest: "/usr/local/etc/php/{{ php_version }}/conf.d/ext-opcache.ini"
     when: "'opcache' in php_modules"
-    notify:
-      - Restart PHP
     tags:
       - php
 
+  - name: Configure PHP Xdebug
+    template:
+      src: ext-xdebug.ini.j2
+      dest: "/usr/local/etc/php/{{ php_version }}/conf.d/ext-xdebug.ini"
+    when: "'xdebug' in php_modules"
   - include: composer.yml

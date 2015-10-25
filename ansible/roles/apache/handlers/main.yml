@@ -1,11 +1,5 @@
 ---
   - name: Restart Apache
-    command: "brew services restart httpd22"
-    tags:
-      - apache
-
-  - name: Start port forwarding
-    command: launchctl load -Fw /Library/LaunchDaemons/co.echo.httpdfwd.plist
-    sudo: yes
+    command: "sudo apachectl restart"
     tags:
       - apache

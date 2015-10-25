@@ -13,14 +13,6 @@
     tags:
       - mysql
 
-  - name: Debug 1
-    debug:
-      msg: "{{ mysql_brew_prefix }}"
-
-  - name: Debug 2 
-    debug:
-      msg: "{{ brew_prefix }}"
-
   - name: Copy MySQL configuration
     shell: "cp {{ mysql_brew_prefix.stdout }}/support-files/my-default.cnf {{ brew_prefix.stdout }}/etc/my.cnf"
     args:

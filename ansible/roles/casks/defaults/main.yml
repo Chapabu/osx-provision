@@ -1,13 +1,11 @@
 cask_apps:
-  - phpstorm
-  - pycharm
+  - atom
   - google-chrome
   - firefox
   - alfred
   - sequel-pro
   - adium
   - spotify
-  - sublime-text3
   - vagrant
   - virtualbox
 

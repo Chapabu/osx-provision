@@ -1,0 +1,7 @@
+[xdebug]
+zend_extension="/usr/local/opt/php{{ php_brew_version }}-xdebug/xdebug.so"
+xdebug.remote_enable=1
+xdebug.remote_port="{{ php_xdebug_port }}"
+xdebug.max_nesting_level={{ php_xdebug_max_nesting_level }}
+xdebug.profiler_enable=1
+xdebug.idekey="{{ php_xdebug_idekey }}"
